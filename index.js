@@ -9,7 +9,7 @@ const authRoutes = require('./routes/auth');
 const authMiddleware = require('./middleware/auth');
 const variablesMiddleware = require('./middleware/variables');
 
-const PORT = process.env.PORT || 27017
+const PORT = process.env.PORT || 3000
 
 const app = express()
 const hbs = exphbs.create({
