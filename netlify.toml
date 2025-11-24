@@ -1,11 +1,16 @@
 [build]
+    
     # publish = "views" 
-
+    
 [functions]
-    directory = "/functions" 
+
+    directory = "netlify/functions" 
+
 
 [[redirects]]
- 
+    # Перехоплюємо весь трафік
     from = "/*"
-    to = "/.functions/server"
+    
+    to = "/.netlify/functions/server"
+    
     status = 200
