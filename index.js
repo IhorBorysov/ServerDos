@@ -9,7 +9,7 @@ const authRoutes = require('./routes/auth');
 const authMiddleware = require('./middleware/auth');
 const variablesMiddleware = require('./middleware/variables');
 
-// const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 27017
 
 const app = express()
 const hbs = exphbs.create({
@@ -52,18 +52,18 @@ async function connectDB() {
     }
 }
 
-// async function star() {
-//     try{
-//         await mongoose.connect('mongodb+srv://ibuser:qwerzxc149@cluster0.k4sxvyl.mongodb.net/?appName=Cluster0')
-//         module.exports = app;
-//         // app.listen(PORT, () => {
-//         //     console.log(`Server has been star: http://localhost:${PORT}`)
-//         // })
+async function star() {
+    try{
+        await mongoose.connect('mongodb+srv://ibuser:qwerzxc149@cluster0.k4sxvyl.mongodb.net/?appName=Cluster0')
+        module.exports = app;
+        app.listen(PORT, () => {
+            console.log(`Server has been star: http://localhost:${PORT}`)
+        })
         
-//     } catch (e) {
-//         console.log(e)
-//     }
-// }
+    } catch (e) {
+        console.log(e)
+    }
+}
 
 const db = mongoose.connection
 
@@ -78,4 +78,4 @@ module.exports = {
     app,
     connectDB 
 };
-// star()
+star()
