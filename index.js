@@ -9,7 +9,7 @@ const authRoutes = require('./routes/auth');
 const authMiddleware = require('./middleware/auth');
 const variablesMiddleware = require('./middleware/variables');
 
-const PORT = process.env.PORT || 3000
+// const PORT = process.env.PORT || 3000
 
 const app = express()
 const hbs = exphbs.create({
@@ -40,20 +40,30 @@ app.use(authRoutes);
 
 app.use(doserRoutes)
 
-
-
-async function star() {
-    try{
-        await mongoose.connect('mongodb+srv://ibuser:qwerzxc149@cluster0.k4sxvyl.mongodb.net/?appName=Cluster0')
-        module.exports = app;
-        // app.listen(PORT, () => {
-        //     console.log(`Server has been star: http://localhost:${PORT}`)
-        // })
-        
-    } catch (e) {
-        console.log(e)
+async function connectDB() {
+    if (mongoose.connection.readyState === 0) { 
+        try {
+            const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://ibuser:qwerzxc149@cluster0.k4sxvyl.mongodb.net/?appName=Cluster0';
+            await mongoose.connect(mongoUri);
+            console.log("MongoDB connected successfully.");
+        } catch (e) {
+            console.error("MongoDB connection failed:", e);
+        }
     }
 }
+
+// async function star() {
+//     try{
+//         await mongoose.connect('mongodb+srv://ibuser:qwerzxc149@cluster0.k4sxvyl.mongodb.net/?appName=Cluster0')
+//         module.exports = app;
+//         // app.listen(PORT, () => {
+//         //     console.log(`Server has been star: http://localhost:${PORT}`)
+//         // })
+        
+//     } catch (e) {
+//         console.log(e)
+//     }
+// }
 
 const db = mongoose.connection
 
@@ -64,5 +74,8 @@ db.on('error', (err) => {
 db.once('open', () => {
     console.log(' Mongoose успішно підключено до DB!')
 })
-
-star()
+module.exports = {
+    app,
+    connectDB 
+};
+// star()
