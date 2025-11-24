@@ -1,0 +1,12 @@
+{{> head}}
+
+<body>
+    {{#isAuth}}
+    {{> navbar}}
+{{/isAuth}}
+    <div class="container">
+        {{{ body }}}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<nav class="grey darken-4">
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo">Сервер вимірювань дозиметра</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+      {{#if isIndex}}
+      <li class="active"><a href="/">Перегляд бази даних</a></li>
+      {{else}}
+      <li><a href="/">Перегляд бази даних</a></li>
+      {{/if}}
+
+      {{#if isCreate}}
+      <li class="active"><a href="/create">Введення координат</a></li>
+      {{else}}
+      <li><a href="/create">Введення координат</a></li>
+      {{/if}}
+
+      <li style="margin-right: 20px;">  {{! <-- Додали відступ праворуч для <li> }}
+                    <form action="/logout" method="POST" class="logout-form">
+                        <button type="submit" class="btn logout-button">Вихід</button> {{! <-- Змінили клас }}
+                    </form>
+                </li>
+
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,18 @@
+<form action="/create" method="POST">
+  <h2>Введення нового заміру</h2>
+
+  <div class="input-field">
+    <input type="number" name="longitude" required step="any" min="-90" max="90" placeholder="Введіть довготу" required>
+    
+    <input type="number" name="latitude" required step="any" min="-90" max="90" placeholder="Введіть широту" required>
+    
+    <input type="number" name="radiation" required min="0" step="0.01" placeholder="Введіть рівень радіації" required>
+    
+    <input type="datetime-local" name="timestamp" placeholder="Час вимірювання" required>
+  </div>
+
+  <button type="submit" class="btn waves-effect waves-light green darken-1">
+      Зберегти вимір
+  </button>
+</form>
+

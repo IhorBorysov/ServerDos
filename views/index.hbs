@@ -1,0 +1,37 @@
+<h2>База даних вимірів радіації</h2>
+
+{{#if radCoord.length}}
+<ul>
+  {{#each radCoord}}
+  <li class="radCoord">
+    
+      <label>
+        {{#if completed}}
+          <span class="coordinate-data">
+            {{latitude}},
+            {{longitude}},
+            {{radiation}},
+            {{timestamp}} 
+          </span>
+        {{else}}
+          <span class="coordinate-data">
+              {{latitude}}, 
+              {{longitude}} 
+              {{radiation}} 
+              {{timestamp}} 
+          </span>
+        {{/if}}
+
+        <form action="/delete" method="POST" onsubmit="return confirm('Ви впевнені, що хочете видалити цей запис?')">
+            <input type="hidden" value="{{_id}}" name="id">
+            <button class="btn btn-small red darken-2" type="submit">
+                ВИДАЛИТИ
+            </button>
+        </form>
+      </label>
+  </li>
+  {{/each}}
+</ul>
+{{else}}
+<p>Наразі база даних не містить жодних записів.</p>
+{{/if}}

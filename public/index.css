@@ -1,0 +1,46 @@
+.radCoord {
+  margin-bottom: 1rem;
+}
+
+.container h2 {
+    color: #0d47a1;
+    margin-bottom: 1.5rem; 
+    font-weight: 500;
+}
+
+nav .brand-logo {
+    font-size: 1.5rem;
+    font-weight: 500; 
+    color: white;
+    cursor: default; 
+}
+
+.radCoord span.completed {
+  text-decoration: line-through;
+}
+
+.radCoord label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: #f3f3f3;
+  padding: 1rem;
+  flex-grow: 1;
+  border-radius: 8px;
+}
+
+.radCoord i {
+  z-index: 2;
+}
+
+nav .brand-logo {
+    margin-left: 10px; 
+}
+
+.coordinate-data {
+    font-size: 1.1em; 
+    color: #333; 
+}
+
