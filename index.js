@@ -26,10 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 
 app.use(session({
-    secret: 'super secret key for session', // Замініть на складний рядок
+    secret: 'super secret key for session', 
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 } // Сесія на 24 години
+    cookie: { maxAge: 1000 * 60 * 60 * 24 } 
 }));
 
 
@@ -45,9 +45,10 @@ app.use(doserRoutes)
 async function star() {
     try{
         await mongoose.connect('mongodb+srv://ibuser:qwerzxc149@cluster0.k4sxvyl.mongodb.net/?appName=Cluster0')
-        app.listen(PORT, () => {
-            console.log(`Server has been star: http://localhost:${PORT}`)
-        })
+        module.exports = app;
+        // app.listen(PORT, () => {
+        //     console.log(`Server has been star: http://localhost:${PORT}`)
+        // })
         
     } catch (e) {
         console.log(e)
