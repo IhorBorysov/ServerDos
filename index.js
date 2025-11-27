@@ -10,8 +10,10 @@ const authMiddleware = require('./middleware/auth');
 const variablesMiddleware = require('./middleware/variables');
 
 const PORT = process.env.PORT || 3000
+const MONGO_URI = process.env.MONGODB_URI || 'mongodb+srv://ibuser:qwerzxc149@cluster0.k4sxvyl.mongodb.net/?retryWrites=true&w=majority';
 
 const app = express()
+
 const hbs = exphbs.create({
     defaultLayout: 'main',
     extname: 'hbs'
@@ -22,8 +24,8 @@ app.set('view engine', 'hbs')
 app.set('views','views')
 
 app.use(express.urlencoded({extended: true}))
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')))
-
 
 app.use(session({
     secret: 'super secret key for session', 
@@ -32,50 +34,24 @@ app.use(session({
     cookie: { maxAge: 1000 * 60 * 60 * 24 } 
 }));
 
-
 app.use(varsMiddleware);
 app.use(variablesMiddleware);
 
 app.use(authRoutes);
+app.use(doserRoutes);
 
-app.use(doserRoutes)
+async function start() {
+  try {
+    await mongoose.connect(MONGO_URI);
+    console.log('MongoDB connected successfully');
 
-async function connectDB() {
-    if (mongoose.connection.readyState === 0) { 
-        try {
-            const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://ibuser:qwerzxc149@cluster0.k4sxvyl.mongodb.net/?appName=Cluster0';
-            await mongoose.connect(mongoUri);
-            console.log("MongoDB connected successfully.");
-        } catch (e) {
-            console.error("MongoDB connection failed:", e);
-        }
-    }
+    app.listen(PORT, () => {
+      console.log(`Server started: http://localhost:${PORT}`);
+    });
+
+  } catch (err) {
+    console.error('MongoDB connection error:', err);
+  }
 }
 
-async function star() {
-    try{
-        await mongoose.connect('mongodb+srv://ibuser:qwerzxc149@cluster0.k4sxvyl.mongodb.net/?appName=Cluster0')
-        module.exports = app;
-        app.listen(PORT, () => {
-            console.log(`Server has been star: http://localhost:${PORT}`)
-        })
-        
-    } catch (e) {
-        console.log(e)
-    }
-}
-
-const db = mongoose.connection
-
-db.on('error', (err) => {
-    console.error(' Помилка підключення MongoDB:', err)
-})
-
-db.once('open', () => {
-    console.log(' Mongoose успішно підключено до DB!')
-})
-module.exports = {
-    app,
-    connectDB 
-};
-star()
+start()
